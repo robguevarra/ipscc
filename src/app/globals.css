@@ -1,26 +1,209 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ------------------------------------------------------------------ *
+ * iPSCC design system — industrial / engineered B2B
+ * Authority navy + brand azure + emerald "on-track" accent
+ * ------------------------------------------------------------------ */
+
+@theme {
+  /* Brand + neutrals */
+  --color-ink: #06141f;
+  --color-navy: #0a2034;
+  --color-navy-700: #0f2d49;
+  --color-navy-600: #14385c;
+
+  --color-azure-50: #eef6fe;
+  --color-azure-100: #d6e9fc;
+  --color-azure-200: #aed3f8;
+  --color-azure-300: #7bb6f1;
+  --color-azure-400: #4c98e6;
+  --color-azure-500: #2a86e0;
+  --color-azure-600: #1473c6;
+  --color-azure-700: #0f5ca3;
+
+  --color-emerald: #12b886;
+  --color-emerald-bright: #1ed39b;
+  --color-emerald-deep: #0d8f69;
+
+  --color-amber: #f5a524;
+
+  --color-paper: #f4f7fb;
+  --color-paper-2: #e9f0f8;
+  --color-line: #d8e2ee;
+
+  --color-slate-50: #f6f8fb;
+  --color-slate-100: #eaeff5;
+  --color-slate-200: #d6dfeb;
+  --color-slate-300: #b7c4d6;
+  --color-slate-400: #8294ab;
+  --color-slate-500: #5d6f86;
+  --color-slate-600: #45566b;
+  --color-slate-700: #324154;
+
+  /* Fonts (wired to next/font in layout.tsx) */
+  --font-display: var(--font-archivo), "Archivo", system-ui, sans-serif;
+  --font-sans: var(--font-plex), "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), "IBM Plex Mono", ui-monospace, monospace;
+
+  /* Easing */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg: #ffffff;
+    --fg: #0a2034;
+  }
+
+  * {
+    border-color: var(--color-line);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv01";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-navy);
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background: var(--color-azure-600);
+    color: white;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-azure-500);
+    outline-offset: 3px;
+    border-radius: 2px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* Eyebrow / technical label */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* Blueprint grid background */
+  .bg-blueprint {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .bg-blueprint-light {
+    background-image:
+      linear-gradient(to right, rgba(10, 32, 52, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(10, 32, 52, 0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* Radial atmosphere for dark sections */
+  .glow-azure {
+    background:
+      radial-gradient(60% 60% at 15% 0%, rgba(20, 115, 198, 0.35), transparent 60%),
+      radial-gradient(50% 50% at 100% 100%, rgba(18, 184, 134, 0.18), transparent 60%);
+  }
+
+  /* Prose tuning for blog */
+  .prose-ipscc {
+    color: var(--color-slate-700);
+    line-height: 1.75;
+  }
+  .prose-ipscc h2 {
+    font-size: 1.6rem;
+    margin-top: 2.4rem;
+    margin-bottom: 0.85rem;
+  }
+  .prose-ipscc h3 {
+    font-size: 1.25rem;
+    margin-top: 1.8rem;
+    margin-bottom: 0.6rem;
+  }
+  .prose-ipscc p { margin-bottom: 1.15rem; }
+  .prose-ipscc ul { margin: 1rem 0 1.4rem; padding-left: 1.25rem; list-style: disc; }
+  .prose-ipscc li { margin-bottom: 0.5rem; }
+  .prose-ipscc strong { color: var(--color-navy); font-weight: 600; }
+  .prose-ipscc a { color: var(--color-azure-600); text-decoration: underline; text-underline-offset: 3px; }
+  .prose-ipscc blockquote {
+    border-left: 3px solid var(--color-emerald);
+    padding-left: 1.1rem;
+    font-style: italic;
+    color: var(--color-navy);
+    margin: 1.5rem 0;
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+
+  /* Load-in animations (staggered via inline delay) */
+  .anim-rise {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: rise 0.9s var(--ease-out-expo) forwards;
+  }
+  .anim-fade {
+    opacity: 0;
+    animation: fade 1s ease forwards;
+  }
+
+  /* Scroll reveal (toggled by Reveal component) */
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .marquee-track {
+    animation: marquee 38s linear infinite;
+  }
+}
+
+@keyframes rise {
+  to { opacity: 1; transform: none; }
+}
+@keyframes fade {
+  to { opacity: 1; }
+}
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
 }

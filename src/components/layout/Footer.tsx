@@ -16,7 +16,7 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-4">
             <Image
-              src="/brand/ipscc-logo-alt.png"
+              src="/brand/ipscc-logo.png"
               alt={site.name}
               width={830}
               height={196}
